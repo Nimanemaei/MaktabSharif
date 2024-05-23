@@ -44,3 +44,9 @@ for i in range(10):
     sum = current_num + previous_num
     print(f'current number is: {current_num} and previous number is: {previous_num} and sum is: {sum}')
     previous_num = i
+
+# Question 6:
+string = input('please enter your string: ')
+for i in range(len(string)):
+    if i%2 == 0:
+        print(string[i])
