@@ -1,0 +1,33 @@
+<!-- task_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+</head>
+<body>
+    <h1>Task List</h1>
+    <form method="get">
+        <input type="text" name="search" placeholder="Search tasks..." value="{{ request.GET.search }}">
+        <button type="submit">Search</button>
+    </form>
+    <ul>
+        {% for task in tasks %}
+            <li>{{ task.title }} - Due: {{ task.due_date }} 
+                <a href="{% url 'task_toggle' task.id %}">Toggle Completion</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <div>
+        {% for page in tasks.paginator.page_range %}
+            {% if tasks.number == page %}
+                <strong>{{ page }}</strong>
+            {% else %}
+                <a href="?page={{ page }}&search={{ request.GET.search }}">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <a href="{% url 'task_create' %}">Create New Task</a>
+</body>
+</html>
